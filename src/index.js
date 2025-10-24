@@ -82,6 +82,33 @@ client.on("interactionCreate", async interaction => {
         roleId = '1430922012595064862'; // ID role Alight Motion
         responseMessage = 'Role Alight Motion telah ditambahkan!';
         break;
+      default:
+        responseMessage = 'Opsi tidak dikenal.';
+        await interaction.reply({ content: responseMessage, ephemeral: true });
+        return;
+    }
+
+    try {
+      const role = interaction.guild.roles.cache.get(roleId);
+      if (role) {
+        await member.roles.add(role);
+        await interaction.reply({ content: responseMessage, ephemeral: true });
+      } else {
+        await interaction.reply({ content: 'Role tidak ditemukan.', ephemeral: true });
+      }
+    } catch (error) {
+      console.error(error);
+      await interaction.reply({ content: 'Terjadi kesalahan saat menambahkan role.', ephemeral: true });
+    }
+  }
+
+  if (interaction.customId === 'select_option2') {
+    const selectedValue = interaction.values[0];
+    const member = interaction.member;
+    let roleId = '';
+    let responseMessage = '';
+
+    switch (selectedValue) {
       case 'mv':
         roleId = '1431315058218242169'; // ID role MV
         responseMessage = 'Role MV telah ditambahkan!';
