@@ -82,6 +82,14 @@ client.on("interactionCreate", async interaction => {
         roleId = '1430922012595064862'; // ID role Alight Motion
         responseMessage = 'Role Alight Motion telah ditambahkan!';
         break;
+      case 'mv':
+        roleId = '1431315058218242169'; // ID role MV
+        responseMessage = 'Role MV telah ditambahkan!';
+        break;
+      case 'design':
+        roleId = '1431315300619522168'; // ID role Design
+        responseMessage = 'Role Design telah ditambahkan!';
+        break;
       default:
         responseMessage = 'Opsi tidak dikenal.';
         await interaction.reply({ content: responseMessage, ephemeral: true });
