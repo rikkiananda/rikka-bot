@@ -24,16 +24,6 @@ module.exports = {
           label: 'Alight Motion',
           description: 'Pilih role Alight Motion',
           value: 'alight_motion',
-        },
-        {
-          label: 'MV',
-          description: 'Pilih role MV',
-          value: 'mv',
-        },
-        {
-          label: 'Design',
-          description: 'Pilih role Design',
-          value: 'design',
         }
       );
 
