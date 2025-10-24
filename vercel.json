@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "protect": false,
   "builds": [
     {
       "src": "api/interactions.js",
