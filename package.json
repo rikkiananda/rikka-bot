@@ -5,14 +5,20 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
+    "webhook": "node webhook.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@mistralai/mistralai": "^1.10.0",
     "discord-chatbot": "^2.1.0",
     "discord.js": "^14.23.2",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "node-fetch": "^2.7.0",
+    "openai": "^6.7.0"
   },
   "engines": {
     "node": "22.x"
