@@ -2,7 +2,7 @@
   "name": "discord.js-series",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "bot.js",
   "scripts": {
     "start": "node src/index.js",
     "webhook": "node webhook.js",
@@ -14,7 +14,7 @@
     "@google/generative-ai": "^0.24.1",
     "@mistralai/mistralai": "^1.10.0",
     "discord-chatbot": "^2.1.0",
-    "discord.js": "^14.23.2",
+    "discord.js": "^14.25.1",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "node-fetch": "^2.7.0",

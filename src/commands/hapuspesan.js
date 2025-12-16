@@ -13,12 +13,14 @@ module.exports = {
     ),
 
   async execute(interaction) {
+    await interaction.deferReply({ flags: 64 }); // Defer with ephemeral flag
+
     const jumlah = interaction.options.getInteger('jumlah');
     const channel = interaction.channel;
 
     // Check if bot has permission to manage messages
     if (!channel.permissionsFor(interaction.guild.members.me).has('ManageMessages')) {
-      return await interaction.reply({ content: 'Bot tidak memiliki izin untuk menghapus pesan.', ephemeral: true });
+      return await interaction.editReply({ content: 'Bot tidak memiliki izin untuk menghapus pesan.' });
     }
 
     try {
@@ -26,10 +28,16 @@ module.exports = {
       const messages = await channel.messages.fetch({ limit: jumlah });
       // Bulk delete
       const deleted = await channel.bulkDelete(messages, true); // true to skip non-deletable messages
-      await interaction.reply({ content: `Berhasil menghapus ${deleted.size} pesan.`, ephemeral: true });
+      if (deleted.size === 0) {
+        await interaction.editReply({ content: 'Tidak ada pesan yang dapat dihapus. Pastikan pesan tidak lebih dari 2 minggu dan bot memiliki izin.' });
+      } else if (deleted.size < messages.size) {
+        await interaction.editReply({ content: `Berhasil menghapus ${deleted.size} pesan. Beberapa pesan mungkin terlalu lama (lebih dari 2 minggu) dan tidak dapat dihapus secara massal.` });
+      } else {
+        await interaction.editReply({ content: `Berhasil menghapus ${deleted.size} pesan.` });
+      }
     } catch (error) {
       console.error('Error deleting messages:', error);
-      await interaction.reply({ content: 'Gagal menghapus pesan. Pastikan pesan tidak lebih dari 2 minggu.', ephemeral: true });
+      await interaction.editReply({ content: 'Gagal menghapus pesan. Pastikan pesan tidak lebih dari 2 minggu.' });
     }
   },
 };

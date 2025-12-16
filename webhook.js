@@ -62,7 +62,7 @@ app.post('/typeform', async (req, res) => {
       content += `- **${question}:** ${answerText}\n`;
     });
 
-    // Kirim ke Discord Webhook
+  
     const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL;
     if (!discordWebhookUrl) {
       console.error('DISCORD_WEBHOOK_URL tidak ditemukan di environment variables');

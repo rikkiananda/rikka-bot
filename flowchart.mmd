@@ -1,0 +1,5 @@
+flowchart TD
+    A[#apply Channel<br>Berisi Link Form] --> B[User Mengisi Form]
+    B --> C{Form Disubmit?}
+    C -->|Ya| D[#submission Channel<br>Data Ditampilkan]
+    C -->|Tidak| B

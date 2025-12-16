@@ -65,7 +65,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
   }
 })();
 
-client.once("ready", () => {
+client.once("clientReady", () => {
   console.log(`✅ Bot logged in as ${client.user.tag}`);
 });
 
@@ -119,7 +119,9 @@ client.on("interactionCreate", async interaction => {
     await command.execute(interaction);
   } catch (error) {
     console.error(error);
-    await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    if (!interaction.replied) {
+      await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    }
   }
 });
 

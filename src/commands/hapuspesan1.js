@@ -6,9 +6,11 @@ module.exports = {
     .setDescription('Hapus pesan yang direply'),
 
   async execute(interaction) {
+    await interaction.deferReply({ flags: 64 }); // Defer with ephemeral flag
+
     // Check if the command is used as a reply
     if (!interaction.reference) {
-      return await interaction.reply({ content: 'Perintah ini harus digunakan sebagai reply ke pesan yang ingin dihapus.', ephemeral: true });
+      return await interaction.editReply({ content: 'Perintah ini harus digunakan sebagai reply ke pesan yang ingin dihapus.' });
     }
 
     const channel = interaction.channel;
@@ -16,16 +18,16 @@ module.exports = {
 
     // Check if bot has permission to manage messages
     if (!channel.permissionsFor(interaction.guild.members.me).has('ManageMessages')) {
-      return await interaction.reply({ content: 'Bot tidak memiliki izin untuk menghapus pesan.', ephemeral: true });
+      return await interaction.editReply({ content: 'Bot tidak memiliki izin untuk menghapus pesan.' });
     }
 
     try {
       // Delete the referenced message
       await channel.messages.delete(messageId);
-      await interaction.reply({ content: 'Pesan berhasil dihapus.', ephemeral: true });
+      await interaction.editReply({ content: 'Pesan berhasil dihapus.' });
     } catch (error) {
       console.error('Error deleting message:', error);
-      await interaction.reply({ content: 'Gagal menghapus pesan. Pastikan pesan masih ada dan bot memiliki izin.', ephemeral: true });
+      await interaction.editReply({ content: 'Gagal menghapus pesan. Pastikan pesan masih ada dan bot memiliki izin.' });
     }
   },
 };
